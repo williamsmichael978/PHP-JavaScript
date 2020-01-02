@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<title>Michael Williams Kung Fu School</title>
+<meta charset="utf-8">
+<link href="main.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+	<header>
+    	<h1>Michael Williams Kung Fu School- Search & Split </h1>
+    </header>
+	
+<script type="text/javascript">
+function queryFunction(){
+	//window.alert("MICHAEL");
+	var ajaxRequest;
+	try{
+			// Opera 8.0+, Firefox, Safari
+			ajaxRequest = new XMLHttpRequest();
+		} catch (e){
+			// Internet Explorer Browsers
+			try{
+				ajaxRequest = new ActiveXObject("Msxml2.XMLHTTP");
+			} catch (e) {
+				try{
+					ajaxRequest = new ActiveXObject("Microsoft.XMLHTTP");
+				} catch (e){
+					// Something has messed up
+					alert("Your browser has now broken!");
+					return false;
+				}
+			}
+		}
+
+	ajaxRequest.onreadystatechange = function() {
+		if (ajaxRequest.readyState == 4) {
+			var some = ajaxRequest.responseText.split("-");
+	
+	
+	document.forms[1].studentID.value = some[0];
+	document.forms[1].name.value = some[1];
+	document.forms[1].email.value = some[2];
+	document.forms[1].GPA.value = some[3];
+		}
+	}
+
+	var studentID = document.getElementById("studentID").value;
+	var queryString = "?studentID=" + studentID;
+	ajaxRequest.open("GET", "michaelwilliams_search_single.php"+queryString, true);
+	ajaxRequest.send(null);
+	
+	
+	
+}
+
+function clearTextbox(){
+	document.myForm.studentID.value = "";
+	document.getElementById("studentID", "name", "email", "GPA").value = "";
+}
+</script>
+
+<h2>Search for Students by studentID</h2><br>
+
+
+<form name="myForm">
+	<label>StudentID:</label>
+	<input type="text" id="studentID"><br><br>
+	<input type="button" onclick="queryFunction();" value="Search">
+</form>
+
+<br>
+<div id="ajaxDiv"><p>Students information will displayed in the textboxes below:</p></div><br><br>
+
+
+<form name="myForm1">
+	
+	<label>Student ID:</label> 
+	<input type="text" name="studentID"><br>
+	<label>Student Name:</label>
+	<input type="text" name="name"><br>
+	<label>Email:</label>
+	<input type="text" name="email"><br>
+	<label>GPA:</label>
+	<input type="text" name="GPA"><br>
+</form>
+	
+	
+	<p><a href="index.htm">Back to first page</a></p>
+		</section>
+		
+    </main>
+		
+	<footer>
+        <p class="right">
+        
+        &copy; <?php echo date("Y"); ?> Michael Williams Kung Fu School.
+        </p>
+	</footer>
+</body>
+
+</html>
